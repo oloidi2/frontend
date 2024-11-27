@@ -552,7 +552,20 @@
 					return this.sortOrder === "asc" ? result : -result;
 				});
 			},
-			
+			filteredAndSortedProducts() {
+				// Filter the sorted products based on the search query
+				const query = this.searchQuery.toLowerCase();
+
+				return this.sortedProducts.filter(product => {
+					// Check if the product matches the query
+					return (
+						product.title.toLowerCase().includes(query) ||
+						product.location.toLowerCase().includes(query) ||
+						product.subcat.toLowerCase().includes(query) ||
+						String(product.price).toLowerCase().includes(query)
+					);
+				});
+			},
 		},
 		watch: {
 			// Watch formData and validate the form when changes occur
